@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PoultryPulsePassport | Survey</title>
+<meta name="description" content="Survey landing page for the PoultryPulsePassport project.">
+<style>
+:root{
+  --navy:#123047; --blue:#1d6f8f; --teal:#178b82; --gold:#e6ad45;
+  --cream:#f6f8f5; --text:#20313b; --muted:#61717a; --white:#fff;
+  --glass:rgba(255,255,255,.62); --glass-border:rgba(255,255,255,.82);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:radial-gradient(ellipse at 8% 8%,rgba(23,139,130,.12),transparent 30%),radial-gradient(ellipse at 92% 34%,rgba(230,173,69,.13),transparent 27%),linear-gradient(145deg,#edf6f4 0%,#f8faf8 54%,#eef5f4 100%);color:var(--text);line-height:1.6}
+.container{width:min(1120px,92%);margin:auto}
+header{padding:14px 0;position:sticky;top:0;z-index:5;background:rgba(245,250,248,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.7)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--navy)}
+.logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--teal),var(--blue));
+display:grid;place-items:center;color:#fff;font-size:21px;box-shadow:0 8px 22px #178b8230}
+.chicken-mark{display:inline-block;transform-origin:55% 80%;animation:chicken-step 2.8s ease-in-out infinite}
+@keyframes chicken-step{0%,76%,100%{transform:translateY(0) rotate(0)}82%{transform:translateY(-3px) rotate(-9deg)}88%{transform:translateY(0) rotate(5deg)}94%{transform:translateY(-1px) rotate(-3deg)}}
+.hero{padding:28px 0 38px}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,.72fr);gap:34px;align-items:center;min-height:620px;padding:clamp(30px,6vw,76px);padding-bottom:112px;overflow:hidden;border:1px solid rgba(255,255,255,.5);border-radius:30px;background:linear-gradient(180deg,#78988c 0%,#b4b799 54%,#71835b 54%,#46614b 100%);isolation:isolate;box-shadow:0 28px 70px rgba(18,48,71,.18)}
+.hero-grid::before{position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(10,27,24,.86) 0%,rgba(10,27,24,.68) 38%,rgba(10,27,24,.28) 72%,rgba(10,27,24,.2) 100%),linear-gradient(0deg,rgba(10,27,24,.26),transparent 42%);content:""}
+.farm-scene{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.farm-scene::before{position:absolute;right:-8%;bottom:-7%;left:26%;height:46%;background:repeating-linear-gradient(168deg,rgba(230,222,174,.28) 0 2px,transparent 2px 34px);content:"";transform:skewY(-7deg)}
+.walking-chicken,.eating-chicken,.flying-chicken{position:absolute;width:76px;height:78px}
+.walking-chicken{left:-90px;bottom:12px;animation:chicken-walk 19s linear infinite}
+.eating-chicken{left:42%;bottom:12px;animation:chicken-bob 1.1s ease-in-out infinite}
+.flying-chicken{left:-90px;top:9%;transform:scale(.62);animation:chicken-flight 17s linear infinite}
+.farm-chicken i,.farm-chicken b{position:absolute;display:block}
+.bird-body{top:29px;left:15px;width:43px;height:29px;border-radius:52% 48% 46% 50%;background:#f4ead4;box-shadow:inset -4px -3px 0 rgba(138,113,78,.12)}
+.bird-wing{top:7px;left:10px;width:23px;height:15px;border-radius:55% 45% 58% 42%;background:#e3d5bb;transform:rotate(-12deg)}
+.bird-tail{top:29px;left:7px;width:14px;height:10px;border-radius:80% 10% 80% 20%;background:#e5d9c2;transform:rotate(-28deg)}
+.bird-neck{top:23px;left:45px;width:12px;height:19px;border-radius:60% 60% 30% 30%;background:#f4ead4;transform:rotate(-8deg)}
+.bird-head{top:13px;left:45px;width:22px;height:22px;border-radius:50%;background:#f4ead4}
+.bird-comb{top:-6px;left:7px;width:12px;height:10px;border-radius:80% 60% 20% 20%;background:#b8463d;transform:rotate(8deg)}
+.bird-beak{top:9px;right:-7px;width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:8px solid #e6ad45}
+.bird-eye{top:7px;right:5px;width:3px;height:3px;border-radius:50%;background:#20313b}
+.bird-leg{top:55px;width:2px;height:15px;background:#d89a37;transform-origin:top center}
+.bird-leg::after{position:absolute;bottom:0;left:-3px;width:7px;height:2px;background:#d89a37;content:""}
+.bird-leg-one{left:32px;animation:leg-step .36s ease-in-out infinite alternate}
+.bird-leg-two{left:44px;animation:leg-step .36s ease-in-out .18s infinite alternate-reverse}
+.eating-chicken .bird-head{transform-origin:25% 85%;animation:chicken-peck 1.1s ease-in-out infinite}
+.eating-chicken .bird-neck{transform-origin:top center;animation:neck-peck 1.1s ease-in-out infinite}
+.eating-chicken .bird-leg{animation:none}
+.flying-chicken .bird-wing{transform-origin:20% 55%;animation:wing-flap .24s ease-in-out infinite alternate}
+.flying-chicken .bird-leg{top:55px;height:8px;transform:rotate(32deg);animation:none}
+.feed-pile{position:absolute;left:calc(42% + 67px);bottom:14px;width:16px;height:4px;border-radius:50%;background:#e6ad45;box-shadow:5px -2px 0 -1px #e6ad45,-4px -1px 0 -1px #f0c86e}
+.hero-copy,.system-preview{position:relative;z-index:2}
+.hero-copy{max-width:590px;animation:rise-in .75s .08s both}
+.hero-kicker{display:inline-flex;align-items:center;gap:9px;margin-bottom:12px;color:#e6cf98;font-size:12px;font-weight:800;text-transform:uppercase}
+.hero-kicker::before{width:22px;height:2px;background:var(--gold);content:""}
+.eyebrow{display:inline-block;background:#178b8215;color:var(--teal);font-weight:800;border-radius:999px;padding:7px 13px;font-size:13px}
+h1{font-size:clamp(38px,6vw,68px);line-height:1.03;margin:10px 0 22px;color:#fff;letter-spacing:-1.8px;text-wrap:balance}
+h1 span{color:#f0c86e}
+.lead{font-size:18px;color:var(--muted);max-width:690px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;border-radius:12px;
+text-decoration:none;font-weight:800;border:1px solid transparent;transition:transform .2s,background .2s,box-shadow .2s}
+.btn-primary{background:#e6ad45;color:#1d2b2a;box-shadow:0 12px 25px rgba(12,25,22,.24)}
+.btn-primary:hover{transform:translateY(-2px);background:#f0c86e}
+.btn:focus-visible,.filter-button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn-secondary{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.54);backdrop-filter:blur(12px)}
+.hero .actions{margin-top:0}
+.card{background:var(--glass);border:1px solid var(--glass-border);border-radius:24px;padding:28px;
+box-shadow:0 18px 45px #12304712;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.system-preview{padding:22px;background:rgba(247,250,246,.82);border-color:rgba(255,255,255,.72);box-shadow:0 24px 60px rgba(6,20,17,.28);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);animation:rise-in .8s .2s both}
+.dashboard-heading{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.dashboard-mark{display:grid;place-items:center;flex:none;width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#d9eee8,#edf3d9);font-size:21px}
+.dashboard-heading small,.dashboard-kpi small{display:block;color:var(--muted);font-size:11px;font-weight:750}
+.dashboard-title{margin:1px 0 0;color:var(--navy);font-size:21px;line-height:1.2}
+.sample-tag{margin-left:auto;padding:6px 9px;border-radius:8px;background:rgba(230,173,69,.2);color:#70500d;font-size:10px;font-weight:800;white-space:nowrap}
+.dashboard-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.dashboard-kpi{min-width:0;padding:12px;border:1px solid rgba(255,255,255,.9);border-radius:13px;background:rgba(255,255,255,.52)}
+.dashboard-kpi strong{display:block;margin:3px 0;color:var(--navy);font-size:21px;line-height:1.2}
+.dashboard-kpi span{display:block;color:var(--muted);font-size:10px;line-height:1.35}
+.chart-panel{margin-top:12px;padding:14px;border:1px solid rgba(255,255,255,.9);border-radius:15px;background:rgba(255,255,255,.46)}
+.chart-heading{display:flex;justify-content:space-between;gap:12px;align-items:baseline;color:var(--navy);font-size:12px;font-weight:800}
+.chart-heading span{color:var(--muted);font-size:10px;font-weight:600}
+.chart-bars{height:78px;display:grid;grid-template-columns:repeat(7,1fr);align-items:end;gap:8px;margin-top:12px;padding:0 3px;border-bottom:1px solid #b8c9c7;background:repeating-linear-gradient(to bottom,transparent 0,transparent 24px,rgba(97,113,122,.11) 25px)}
+.chart-bars span{display:block;height:var(--bar-height);min-height:10px;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#45a99a,#1d6f8f);animation:bar-rise .65s ease both;transform-origin:bottom}
+.chart-bars span:nth-child(2){animation-delay:.06s}.chart-bars span:nth-child(3){animation-delay:.12s}.chart-bars span:nth-child(4){animation-delay:.18s}.chart-bars span:nth-child(5){animation-delay:.24s}.chart-bars span:nth-child(6){animation-delay:.3s}.chart-bars span:nth-child(7){animation-delay:.36s}
+.chart-days{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:5px;color:var(--muted);font-size:9px;text-align:center}
+.batch-preview{margin-top:12px;padding:14px;border-radius:15px;background:rgba(18,48,71,.94);color:#fff}
+.batch-heading{display:flex;justify-content:space-between;gap:10px;font-size:11px;font-weight:800}
+.batch-heading strong{color:#f1ca6b;font-size:9px;letter-spacing:.5px}
+.batch-id{display:block;margin-top:6px;color:#fff;font-size:14px;font-weight:800}
+.batch-meta{margin-top:2px;color:#c7d8dc;font-size:10px}
+.batch-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 0;padding:0;list-style:none}
+.batch-steps li{position:relative;padding-top:12px;color:#b8cbd0;font-size:9px;line-height:1.3}
+.batch-steps li::before{position:absolute;top:0;left:0;width:7px;height:7px;border-radius:50%;background:#91a7ac;content:""}
+.batch-steps li.is-done::before{background:#77c9ad}.batch-steps li[aria-current="step"]::before{background:#f1ca6b;box-shadow:0 0 0 3px rgba(241,202,107,.2)}
+.preview-note{margin:10px 2px 0;color:var(--muted);font-size:10px;text-align:right}
+@keyframes bar-rise{from{transform:scaleY(.35);opacity:.55}to{transform:scaleY(1);opacity:1}}
+@keyframes rise-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes chicken-walk{from{left:-90px}to{left:calc(100% + 20px)}}
+@keyframes leg-step{from{transform:rotate(24deg)}to{transform:rotate(-24deg)}}
+@keyframes chicken-flight{0%{left:-90px;top:11%;transform:scale(.62) rotate(-8deg)}45%{top:4%;transform:scale(.62) rotate(3deg)}100%{left:calc(100% + 20px);top:10%;transform:scale(.62) rotate(-2deg)}}
+@keyframes wing-flap{from{transform:rotate(-42deg) scaleY(.78)}to{transform:rotate(42deg) scaleY(1.14)}}
+@keyframes chicken-peck{0%,54%,100%{transform:rotate(0) translateY(0)}68%,78%{transform:rotate(30deg) translateY(4px)}}
+@keyframes neck-peck{0%,54%,100%{transform:rotate(-8deg)}68%,78%{transform:rotate(8deg)}}
+@keyframes chicken-bob{0%,54%,100%{transform:translateY(0)}68%,78%{transform:translateY(2px)}}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
+.stat{background:rgba(255,255,255,.48);border:1px solid rgba(255,255,255,.72);border-radius:16px;padding:18px}
+.stat strong{display:block;color:var(--navy);font-size:25px}
+.stat small{color:var(--muted)}
+section{padding:38px 0}
+h2{font-size:32px;color:var(--navy);margin:0 0 10px;letter-spacing:-.6px}
+.section-intro{color:var(--muted);max-width:760px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;padding:6px;width:fit-content;max-width:100%;border:1px solid rgba(255,255,255,.84);border-radius:16px;background:rgba(255,255,255,.48);backdrop-filter:blur(14px)}
+.filter-button{border:0;border-radius:11px;padding:10px 14px;background:transparent;color:var(--muted);font:inherit;font-size:14px;font-weight:750;cursor:pointer;transition:background .2s,color .2s,transform .2s}
+.filter-button:hover{color:var(--navy);transform:translateY(-1px)}
+.filter-button[aria-pressed="true"]{background:var(--navy);color:#fff;box-shadow:0 5px 14px #12304724}
+.filter-button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.filter-status{min-height:24px;margin:10px 0 0;color:var(--muted);font-size:13px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.feature{padding:23px;border-radius:18px;background:var(--glass);border:1px solid var(--glass-border);border-top:3px solid var(--module-accent,#178b82);box-shadow:0 12px 30px rgba(18,48,71,.06);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:transform .25s,box-shadow .25s,opacity .25s}
+.feature:nth-child(3n+2){--module-accent:#d28b41}.feature:nth-child(3n){--module-accent:#5980aa}
+.feature:hover{transform:translateY(-4px);box-shadow:0 18px 34px rgba(18,48,71,.11)}
+.feature[hidden]{display:none}
+.icon{font-size:25px}
+.feature h3{margin:10px 0 5px;color:var(--navy);font-size:18px}
+.feature p{margin:0;color:var(--muted);font-size:14px}
+.survey{background:linear-gradient(135deg,rgba(18,48,71,.94),rgba(25,86,108,.88));color:#fff;border:1px solid rgba(255,255,255,.32);border-radius:28px;padding:38px;box-shadow:0 22px 50px rgba(18,48,71,.17);backdrop-filter:blur(18px)}
+.survey h2{color:#fff}
+.survey p{color:#dce9ed}
+.survey .btn-primary{background:var(--gold);color:#172d38}
+footer{padding:30px 0 42px;color:var(--muted);font-size:13px;text-align:center}
+body.motion-ready [data-reveal]{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+body.motion-ready [data-reveal].is-visible{opacity:1;transform:translateY(0)}
+@media(max-width:800px){.hero-grid,.features{grid-template-columns:1fr}.hero-grid{gap:25px;min-height:0;padding:34px 34px 112px}.hero-copy{max-width:640px}.system-preview{max-width:540px}.hero{padding-top:20px}.survey{padding:28px}.stats{grid-template-columns:1fr}}
+@media(max-width:520px){.hero-grid{padding:26px 19px 112px;border-radius:22px}.hero-grid::before{background:linear-gradient(90deg,rgba(10,27,24,.84),rgba(10,27,24,.58)),linear-gradient(0deg,rgba(10,27,24,.3),transparent 55%)}.filters{width:100%;display:grid;grid-template-columns:repeat(2,1fr)}.filter-button{padding:10px 8px}.card{padding:22px}.system-preview{padding:16px}.dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-kpi:last-child{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}.chicken-mark{animation:none!important}.walking-chicken{left:calc(50% - 38px)!important;animation:none!important}.eating-chicken{animation:none!important}.eating-chicken .bird-head,.eating-chicken .bird-neck{animation:none!important}.flying-chicken{left:72%!important;top:4%!important;transform:scale(.62)!important;animation:none!important}.bird-leg-one,.bird-leg-two,.flying-chicken .bird-wing{animation:none!important}}
+</style>
+</head>
+<body>
+<header class="container">
+  <div class="brand"><div class="logo"><span class="chicken-mark" aria-hidden="true">🐔</span></div><div>PoultryPulsePassport</div></div>
+</header>
+
+<main>
+<section class="hero">
+<div class="container">
+  <div class="hero-grid">
+    <div class="farm-scene" aria-hidden="true">
+      <div class="walking-chicken farm-chicken">
+        <i class="bird-tail"></i><i class="bird-body"><b class="bird-wing"></b></i><i class="bird-neck"></i>
+        <i class="bird-head"><b class="bird-comb"></b><b class="bird-beak"></b><b class="bird-eye"></b></i>
+        <i class="bird-leg bird-leg-one"></i><i class="bird-leg bird-leg-two"></i>
+      </div>
+      <div class="eating-chicken farm-chicken">
+        <i class="bird-tail"></i><i class="bird-body"><b class="bird-wing"></b></i><i class="bird-neck"></i>
+        <i class="bird-head"><b class="bird-comb"></b><b class="bird-beak"></b><b class="bird-eye"></b></i>
+        <i class="bird-leg bird-leg-one"></i><i class="bird-leg bird-leg-two"></i>
+      </div>
+      <span class="feed-pile"></span>
+      <div class="flying-chicken farm-chicken">
+        <i class="bird-tail"></i><i class="bird-body"><b class="bird-wing"></b></i><i class="bird-neck"></i>
+        <i class="bird-head"><b class="bird-comb"></b><b class="bird-beak"></b><b class="bird-eye"></b></i>
+        <i class="bird-leg bird-leg-one"></i><i class="bird-leg bird-leg-two"></i>
+      </div>
+    </div>
+    <div class="hero-copy">
+      <div class="hero-kicker">Poultry intelligence, from house to harvest</div>
+      <h1>Smarter poultry operations, <span>connected.</span></h1>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSf6xXprnq3aULIVUOlDQyK2XFPiY8rILv8zFuDxEJAikHE7VA/viewform" target="_blank" rel="noopener noreferrer">Take the Survey →</a>
+        <a class="btn btn-secondary" href="#about">Explore the system</a>
+      </div>
+    </div>
+    <div class="card system-preview" data-reveal aria-label="Sample PoultryPulsePassport system dashboard">
+      <div class="dashboard-heading">
+        <div class="dashboard-mark" aria-hidden="true">🐓</div>
+        <div><small>POULTRYPULSEPASSPORT</small><h2 class="dashboard-title">Farm overview</h2></div>
+        <span class="sample-tag">Concept preview</span>
+      </div>
+      <div class="dashboard-kpis" aria-label="Illustrative system metrics">
+        <div class="dashboard-kpi"><small>Flock records</small><strong>12</strong><span>Across 3 houses</span></div>
+        <div class="dashboard-kpi"><small>Birds tracked</small><strong>8,240</strong><span>Sample count</span></div>
+        <div class="dashboard-kpi"><small>Health logs</small><strong>96%</strong><span>Records complete</span></div>
+      </div>
+      <div class="chart-panel">
+        <div class="chart-heading">Production activity <span>Sample week</span></div>
+        <div class="chart-bars" role="img" aria-label="Illustrative production activity trend increases through the sample week">
+          <span style="--bar-height:38%"></span><span style="--bar-height:52%"></span><span style="--bar-height:44%"></span><span style="--bar-height:68%"></span><span style="--bar-height:61%"></span><span style="--bar-height:82%"></span><span style="--bar-height:74%"></span>
+        </div>
+        <div class="chart-days" aria-hidden="true"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+      </div>
+      <div class="batch-preview">
+        <div class="batch-heading"><span>Batch traceability</span><strong>IN PROGRESS</strong></div>
+        <span class="batch-id">Batch ID · PPP-0248</span>
+        <div class="batch-meta">Broiler flock · House 02</div>
+        <ol class="batch-steps" aria-label="Sample batch tracking stages">
+          <li class="is-done">Registered</li><li aria-current="step">Growing</li><li>Ready for dispatch</li>
+        </ol>
+      </div>
+      <p class="preview-note">Illustrative sample data, not live farm records.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+  <h2>What the proposed system covers</h2>
+  <p class="section-intro">The project study identifies several areas where a unified information platform can support poultry operations.</p>
+  <div class="filters" role="group" aria-label="Filter system modules">
+    <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All modules</button>
+    <button class="filter-button" type="button" data-filter="operations" aria-pressed="false">Operations</button>
+    <button class="filter-button" type="button" data-filter="traceability" aria-pressed="false">Traceability</button>
+    <button class="filter-button" type="button" data-filter="insights" aria-pressed="false">Finance & insights</button>
+  </div>
+  <p class="filter-status" id="filter-status" aria-live="polite">Showing all 6 modules</p>
+  <div class="features">
+    <div class="feature" data-category="operations" data-reveal><div class="icon">🐣</div><h3>Batch & Flock Management</h3><p>Document batch ID, origin, number of birds, breed, weight, and registration information.</p></div>
+    <div class="feature" data-category="operations" data-reveal><div class="icon">📋</div><h3>Daily Operations</h3><p>Record mortality, weight, feed usage, and other daily operational activities.</p></div>
+    <div class="feature" data-category="insights" data-reveal><div class="icon">💰</div><h3>Financial Records</h3><p>Track feed, medication, labor, transport, sales, and overall revenue.</p></div>
+    <div class="feature" data-category="traceability" data-reveal><div class="icon">🔎</div><h3>QR Traceability</h3><p>Retrieve a poultry batch's recorded history, movement, production activities, and current status.</p></div>
+    <div class="feature" data-category="insights" data-reveal><div class="icon">📊</div><h3>Business Analytics</h3><p>Generate reports, summaries, performance indicators, and operational insights.</p></div>
+    <div class="feature" data-category="traceability" data-reveal><div class="icon">🚚</div><h3>Delivery Updates</h3><p>Address delivery tracking information to help reduce uncertainty and support inquiries.</p></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="container">
+  <div class="survey" data-reveal>
+    <h2>Your feedback matters</h2>
+    <p>
+      If you are a relevant respondent to the study, please answer the survey using the
+      official Google Form. Your responses will help the project team understand
+      information-management needs related to poultry operations.
+    </p>
+  </div>
+</div>
+</section>
+</main>
+
+<script>
+const filterButtons = document.querySelectorAll(".filter-button");
+const featureCards = document.querySelectorAll(".feature[data-category]");
+const filterStatus = document.querySelector("#filter-status");
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const selectedFilter = button.dataset.filter;
+    let visibleCount = 0;
+
+    filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+    featureCards.forEach((card) => {
+      const isVisible = selectedFilter === "all" || card.dataset.category === selectedFilter;
+      card.hidden = !isVisible;
+      if (isVisible) visibleCount += 1;
+    });
+
+    const label = button.textContent.trim().toLowerCase();
+    filterStatus.textContent = selectedFilter === "all"
+      ? `Showing all ${visibleCount} modules`
+      : `Showing ${visibleCount} ${label} modules`;
+  });
+});
+
+if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.body.classList.add("motion-ready");
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll("[data-reveal]").forEach((element) => revealObserver.observe(element));
+}
+</script>
+</body>
+</html>
